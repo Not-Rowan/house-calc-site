@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>House Price Calculator</title>
+
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                text-align: center;
+                padding: 20px;
+            }
+
+            label {
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            input {
+                padding: 8px;
+                font-size: 16px;
+                width: 200px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            }
+
+            #result {
+                margin-top: 20px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>House Price Calculator</h1>
+
+        <label for="lastHousePrice">Last Sold Price:</label>
+        <input type="text" id="lastHousePrice">
+        <br><br>
+
+        <label for="averagePreviousHousePrice">Average House Price During the Month and Year it was Sold:</label>
+        <input type="text" id="averagePreviousHousePrice">
+        <br><br>
+
+        <label for="averageHousePrice">Current Average House Price:</label>
+        <input type="text" id="averageHousePrice">
+        <br><br>
+
+        <button id="calculateButton">Calculate New Price</button>
+
+        <h2 id="result">New House Price: </h2>
+
+        <script>
+            // calculate new house price based on input
+            document.getElementById("calculateButton").addEventListener("click", function() {
+                // get values and remove anything that isn't a number
+                var previousHousePrice = document.getElementById("lastHousePrice").value.replace(/[^0-9.]/g, "");
+                var averagePreviousHousePrice = document.getElementById("averagePreviousHousePrice").value.replace(/[^0-9.]/g, "");
+                var averageHousePrice = document.getElementById("averageHousePrice").value.replace(/[^0-9.]/g, "");
+
+                // get result element and declare new house price variable
+                var resultElement = document.getElementById("result");
+                var newHousePrice = 0;
+
+                // calculate the new house price
+                newHousePrice = Math.round(previousHousePrice * (averageHousePrice / averagePreviousHousePrice));
+
+                // format it with commas and output it
+                resultElement.textContent = "New House Price: $" + newHousePrice.toLocaleString();
+            });
+        </script>
+    </body>
+</html>
